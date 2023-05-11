@@ -26,6 +26,7 @@
         @include('share.input', ['class' => 'col', 'name' => 'city', 'label' => 'Ville', 'value' => $property->city])
         @include('share.input', ['class' => 'col', 'name' => 'postal_code', 'label' => 'Code postal', 'value' => $property->postal_code])
     </div>
+    @include('share.select', ['name' => 'options', 'label' => 'Options', 'value' => $property->options()->pluck('id'), 'multiple' => true])
     @include('share.checkbox', ['name' => 'sold', 'label' => 'Vendu', 'value' => $property->sold])
 
     <div>

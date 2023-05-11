@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\OptionController;
 use App\Http\Controllers\Admin\PropertyController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,5 +22,7 @@ Route::get('/', function () {
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('property', PropertyController::class)->except(['show', 'update']);
     Route::put('property/{property?}', [PropertyController::class, 'update'])->name('property.update');
+    Route::resource('option', OptionController::class)->except(['show', 'update']);
+    Route::put('option/{option?}', [OptionController::class, 'update'])->name('option.update');
 
 });
