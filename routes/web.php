@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\OptionController;
 use App\Http\Controllers\Admin\PropertyController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PropertyController as ControllersPropertyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,8 +17,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [HomeController::class, 'index']);
+
+Route::prefix('biens')->name('property.')->group(function () {
+    Route::get('/', [ControllersPropertyController::class, 'index'])->name('index');
+    Route::get('/{slug}/{property}', [ControllersPropertyController::class, 'show'])->name('show');
 });
 
 Route::prefix('admin')->name('admin.')->group(function () {
