@@ -10,7 +10,7 @@ class PropertyController extends Controller
 {
     public function index(SearchPropertiesRequest $request)
     {
-        $query = Property::query();
+        $query = Property::query()->orderBy('created_at', 'desc');
         if ($request->validated('price')) {
             $query = $query->where('price', '<=', $request->validated('price'));
         }
@@ -32,6 +32,12 @@ class PropertyController extends Controller
 
     public function show(string $slug, Property $property)
     {
-        # code...
+        if ($slug !== $property->getSlug()) {
+            return to_route('property.show',['slug' => $property->getSlug(), 'property' => $property]);
+        }
+
+        return view('property.show',[
+            'property' => $property
+        ]);
     }
 }
