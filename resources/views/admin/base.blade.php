@@ -14,21 +14,7 @@
     {{-- Navbar --}}
     @include('share.navbar')
     {{-- message flash --}}
-    <div class="container mt-5">
-        @if(session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
-        @endif
-        @if($errors->any())
-            <div class="alert alert-danger">
-                <ul class="my-0">
-                    @foreach ($errors->all() as $error )
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-        @yield('content')
-    </div>
+    @include('share.flash')
     <script>
         new TomSelect('select[multiple]', {plugins: {remove_button: {title: 'Supprimer'}} })
     </script>

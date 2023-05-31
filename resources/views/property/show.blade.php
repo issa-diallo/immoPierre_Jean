@@ -17,8 +17,19 @@
     <div class="mt-4">
         <h4>Interested by this property?</h4>
 
-        <form action="" method="post" class="vstack gap-3">
+        @if(session('success'))
+        @include('share.flash')
+        <style>
+            form {
+                display: none !important;
+            }
+        </style>
+        @endif
+
+
+        <form action="{{ route('property.contact', $property) }}" method="post" class="vstack gap-3">
             @csrf
+            @method('post')
             <div class="row">
                 @include('share.input', ['class' => 'col', 'label' => 'Firstname', 'name' => 'firstname'])
                 @include('share.input', ['class' => 'col', 'label' => 'Lastname', 'name' => 'lastname'])
@@ -28,7 +39,7 @@
                 @include('share.input', ['type' => 'email','class' => 'col', 'label' => 'Email', 'name' => 'email'])
             </div>
             @include('share.input', ['type' => 'textarea','class' => 'col', 'label' => 'Message', 'name' => 'message'])
-            <div class="button btn btn-primary">Contact us</div>
+            <button class="button btn btn-primary">Contact us</button>
         </form>
     </div>
 
@@ -58,7 +69,7 @@
                         <td>Location</td>
                         <td>
                             {{ $property->address }} <br>
-                            {{ $property->city }} 
+                            {{ $property->city }}
                             ({{ $property->postal_code }})
                         </td>
                     </tr>
